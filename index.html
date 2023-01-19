@@ -6,29 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="media.css">
 </head>
 <body>
     <h2>Create a new Task</h2>
     <div class="user-section">
         
         <textarea type="text" cols="60" rows="5" id="add"> </textarea>
-      <input type="date" id="date">
+        <input type="date" id="date">
         <button id="btn">add</button>
     </div>
  
    <div class="wrapper">
     <template id="temp">
-       
-            <div class="li">
-                <div class="date-content">
-                    <span></span>
+        <div class="li">
+            <div class="date-content">
+                    <span id="query"></span>
                     <li></li>
                 </div>
-                 <input type="checkbox">
+               
+        <input type="checkbox" id="accept" name="accept" value="yes"> 
+                
              </div>
        
       
    </template>
+
 </div>
 </body>
 <script src="index.js"></script>

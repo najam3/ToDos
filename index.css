@@ -70,9 +70,12 @@ textarea {
     align-self: flex-end;
 }
 
+
+
+
 .user-section {
     background-color: rgb(0, 0, 0);
-   max-inline-size: 100%;
+    max-width: 100%;
     padding: 2em 2em;
     display: flex;
     /* justify-content: center; */
@@ -81,6 +84,8 @@ textarea {
     gap: 1em;
     margin: 0  1em;
 }
+
+
 
 .user-section input {
     padding: 0.5em 0.5em;
@@ -104,4 +109,13 @@ textarea {
     align-self: flex-end;
     border: 0;
     font-weight: bold;
+}
+
+
+#task-details {
+    position: absolute;
+    z-index: 10;
+    max-inline-size: 30%;
+    background-color: red;
+    color: white;
 }
