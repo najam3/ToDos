@@ -18,104 +18,202 @@ dd {
   margin: 0;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-.li {
-    background-color: cornsilk;
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 1em 0.5em;
-    justify-content: space-between;
-    max-inline-size: 100%;
-    margin: 2em 1em;
-    padding: 1em 1em;
-    box-shadow: 12px 12px 12px black;
-    font-size: 18px;
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
 }
-.li > li {
-    word-wrap: break-word;
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
 }
-.date-content {
-    display: flex;
-    gap: 1em;
-    align-items: center;
-}
-.date-content > span {
-    padding: 0.5em;
-    border-radius: 50%;
-    border: 0;
-    background-color: rgb(255, 198, 28);
-    font-weight: bold;
-    color: rgb(0, 0, 0);
-}
+
+/* Set core root defaults */
+
+/* Set core body defaults */
 body {
-    min-height: 100vh;
-    text-rendering: optimizeSpeed;
-    line-height: 1.5;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  background-color: rgb(101, 101, 101);
+}
+
+
+.container {
+    display: grid;
+    grid-template-rows: 60px 241px;
+    z-index: -2;
+    box-sizing: border-box;
+    height: max-content;
+    align-items: center;
+    background-color: navy;
+    margin: 10% auto;
+   box-shadow: 12px 12px 12px black;
+  
+  }
+  .container h2 {
+    padding: 0.5em 0 0 0;
+    font-size: 30px;
+    margin-left: 60px;
+    color: white;
+    margin-top: 1.5em;
+  }
+  .add-notes {
+    padding: 0.5em;
+    width: 90%;
+    margin: 0 auto;
   }
 
-.notes {
-    background-color: white;
-}
-
-textarea {
-     border-radius: 12px;
-     background-color: cornsilk;
-     font-size: 18px;
-     padding: 1em 1em;
-     
-}
-.user-section span {
-    color: snow;
-    align-self: flex-end;
-}
-
-
-
-
-.user-section {
-    background-color: rgb(0, 0, 0);
-    max-width: 100%;
-    padding: 2em 2em;
+  .add-notes > form {
+    width: 100%;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     flex-wrap: wrap;
     gap: 1em;
-    margin: 0  1em;
-}
+    flex-shrink: 1;
+   
+  }
 
 
-
-.user-section input {
-    padding: 0.5em 0.5em;
-    font-size: 16px;
-    background-color: lightgoldenrodyellow;
-    border: 0;
+  .modal p {
+    word-break: break-all;
+    background-color: rgb(201, 201, 201);
+    padding: 1em;
+    border-radius: 10px;
+   
+  }
+  .add-notes > form > button {
     align-self: flex-end;
-}
-
-   h2 {
-    
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    text-align: center;
-    font-size: 30px;
-}
-
-.user-section button {
-    padding: 0.5em 1em;
-    background-color: aquamarine;
-    align-self: flex-end;
+    background-color: #07D240;
     border: 0;
-    font-weight: bold;
-}
-
-
-#task-details {
-    position: absolute;
-    z-index: 10;
-    max-inline-size: 30%;
-    background-color: red;
     color: white;
+    font-weight: bold;
+    padding: 1em 2em;
+  }
+  .add-notes > form > input {
+    align-self: flex-end;
+    padding: 0.5em 1em;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: 1px solid white;
+    border-radius: 2%;
+    font-weight: bold;
+    padding: 1em 2em;
+  }
+
+  @media (min-width: 600px) {
+    .container {
+        width: 60%;
+    }
+  }
+
+
+  .notes-container {
+ overflow-y: scroll;
+   width: 100%;
+  padding: 1em 0;
+    grid-gap: 5px;
+    box-sizing: border-box;
+    height: 350px;
+    align-items: center;
+    background: linear-gradient(to bottom, silver, beige, gold );
+    margin: 0 auto;
+    
+  }
+
+  .notes-container h2 {
+    color: navy;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  textarea {
+    border-radius: 10px;
+    background-color: mintcream;
+  }
+
+  .flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    color: white;
+    gap: 0.5em;
+    background-color: rgb(0, 0, 0);
+  }
+
+  li {
+     font-weight: bold;
+     word-break: break-all;
+     align-self: center;
+     list-style: none;
+     width: 300px;
+     font-size: 16px;
+  }
+
+  .added-notess {
+  flex-direction: column;
+  gap: 2em;
+  display: flex;
+  }
+
+
+  .modal {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 252, 252);
+    z-index: 100;
+    position: absolute;
+    right: 25%;
+    top: 50%;
+     min-width: 50%;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    padding: 1em 2em 2em 2em;
+ border: 1px solid black;
+ border-radius: 10px;
+  }
+
+  .note {
+    font-size: 18px;
+    margin-top: 2em;
+  }
+
+  .time-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: rgb(0, 0, 0);
+    gap: 1em;
+    margin-top: 2em;
+  }
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details > button {
+    border-radius: 50%;
+    background-color: blue;
+    color: white;
+    font-size: 18px;
 }

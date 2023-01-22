@@ -9,29 +9,39 @@
     <link rel="stylesheet" href="media.css">
 </head>
 <body>
-    <h2>Create a new Task</h2>
-    <div class="user-section">
-        
-        <textarea type="text" cols="60" rows="5" id="add"> </textarea>
-        <input type="date" id="date">
-        <button id="btn">add</button>
+    <div class="container">
+        <h2>Create a new task</h2>
+        <div class="add-notes">
+            <form action="">
+        <textarea name="notes" id="notes-input" cols="50" rows="8"></textarea>
+         <input type="date" name="date" id="date">
+         <button type="button" id="add-btn">Add Notes</button>
+         <button type="button" id="edit-btn">Edit</button>
+            </form>
+        </div>
+        <div class="notes-container">
+          <h2>Notes Displayed here</h2>
+            <div class="added-notess">
+           
+            </div>
+        </div>
     </div>
- 
-   <div class="wrapper">
-    <template id="temp">
-        <div class="li">
-            <div class="date-content">
-                    <span id="query"></span>
-                    <li></li>
-                </div>
-               
-        <input type="checkbox" id="accept" name="accept" value="yes"> 
-                
-             </div>
-       
-      
-   </template>
-
+    <!-- Modal -->
+   <div class="modal" style="display: none;">
+    <div class="details">
+        <h2 style="text-align: left;">Details</h2>
+        <button id="close-modal" type="button">&times;</button>
+    </div>
+  
+    <div class="note">
+        <p><q id="noted"></q></p>
+    </div>
+    <div class="time-date">
+        <span id="time"></span>
+        <span id="dated"></span>
+    </div>
+    
+   </div>
 </div>
 </body>
 <script src="index.js"></script>
