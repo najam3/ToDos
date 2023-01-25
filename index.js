@@ -9,7 +9,7 @@ const edit = document.querySelector("#edit-btn");
 
 let notesData = [];
 
-
+let arr = []
 
 
 const createNode = note => {
@@ -30,8 +30,16 @@ const createNode = note => {
   let remove = document.createElement("span");
   remove.innerHTML = "&times;"
   remove.style.fontSize = "28px";
+  remove.style.cursor = 'pointer';
+  remove.onmouseenter = () => remove.style.color = 'white'
+  remove.onmouseleave = () => remove.style.color = '#80FF85'
+  edit.style.cursor = 'pointer';
+  edit.onmouseenter = () => edit.style.color = 'white'
+  edit.onmouseleave = () => edit.style.color = 'red'
+  detailsBtn.onmouseenter = () => detailsBtn.style.color = 'white'
+  detailsBtn.onmouseleave = () => detailsBtn.style.color = '#80FF85'
   remove.style.color = "rgb(128, 255, 133)";
-remove.setAttribute("id", "removeNote")
+ remove.setAttribute("id", "removeNote")
   buttonsContainer.append(edit, remove, detailsBtn);
   buttonsContainer.style.display = "flex";
   buttonsContainer.style.alignItems = "center";
@@ -50,7 +58,7 @@ remove.setAttribute("id", "removeNote")
   checkbox.type = "checkbox";
   checkbox.name = "name";
   checkbox.value = "value";
-  checkbox.id = "check-id";
+  checkbox.setAttribute("id", 'check-id')
   
    div.style.margin = '0 1em'
   //  div.style.padding = '2em 2em'
@@ -65,19 +73,31 @@ remove.setAttribute("id", "removeNote")
   noteContent.style.alignItems = "center";
   div.append(contentBox, buttonsContainer);
    noteContent.innerText = note;
-   notesData.push(note);
    localStorage.setItem('data', JSON.stringify(notesData));
    updateNode.append(div); 
 // Update time and date in modal
+const dateInput = document.querySelector("#date");
+const date = dateInput.value;
+const month = ["Jan", "Feb", "March", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+ let dayAdded =  new Date(date).getDay(day).toString();
+ let monthAdded = new Date(date).getMonth(month).toString();
+ let year = new Date(date).getFullYear().toString();
+ let time = new Date().toLocaleTimeString();
+ 
+ let taskDate = day[dayAdded] + ", " + month[monthAdded] + " " + year
+ arr.push({task: note, date: taskDate, time: time});
+ 
+ checkbox.addEventListener("click", (e) => {
+  e.target.nextElementSibling.classList.toggle('textDecoration'); 
+ e.target.parentElement.parentElement.classList.toggle('completed');
 
-
+ })
 };
 
 
 
-
-updateNode.addEventListener("click", e => {
-   
+updateNode.addEventListener("click", e => { 
      const note = e.target.parentElement.previousElementSibling.children[1].innerText;
      const content = e.target.parentElement.previousElementSibling.children[1];
      const quote = document.querySelector("#noted");
@@ -85,63 +105,57 @@ updateNode.addEventListener("click", e => {
 
      e.target.id === 'boo' ? modal.style.display = 'block' : modal.style.display = 'none' ;
      e.target.id === 'removeNote' ?  e.target.parentElement.parentElement.remove() : 'not';
-
-        if( e.target.id === 'edit-btn'){
-    content.setAttribute("contenteditable", "true");
-    content.style.border = "1px solid red";
-    content.setAttribute("title", "Press Enter");
-    content.addEventListener("keydown", (e) => {
-     let enter = 'Enter';
-     if(e.key === enter) {
-      e.preventDefault()
-      content.setAttribute("contenteditable", "false");
-      content.style.border = "0"
-     }
-    })
-  }
+     quote.innerText =  note;  
+     if( e.target.id === 'boo' ) {
+      
+      const newDate = document.querySelector("#dated");
+      const newTime = document.querySelector("#time");
+      for(let i=0; i< arr.length; i++){
+        if(arr[i].task === content.innerText){
+            newTime.innerHTML =  arr[i].time;
+            newDate.innerHTML = arr[i].date
+        } 
+      }
+     
+     } 
+     if( e.target.id === 'edit-btn'){
+       content.setAttribute("contenteditable", "true");
+      content.style.border = "1px solid red";
+      content.setAttribute("title", "Press Enter");
+      content.classList.contains('textDecoration') ? content.classList.remove('textDecoration')
+      : 'none'
+      document.querySelector('#check-id').classList.add('disabled');
+     
+      content.addEventListener("keydown", (e) => {
+        let enter = 'Enter';
+ if(e.key === enter) {
+  e.preventDefault()
+  content.setAttribute("contenteditable", "false");
+     arr.forEach(item => {
+      item.task = content.innerText
+     }) 
+     console.log(arr);
+  content.style.border = "0";
+  document.querySelector('#check-id').classList.remove('disabled');
   
 
-     quote.innerText =  note;  
-     document.body.style.backgroundColor = "rgba(0, 0, 0, 70%)"  
-   
-     if( e.target.id === 'boo' ) {
-      const dateInput = document.querySelector("#date");
-      const date = dateInput.value;
-    
-      const newDate = document.querySelector("#dated")
-      const month = ["Jan", "Feb", "March", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-       let dayAdded =  new Date(date).getDay(day).toString();
-       let monthAdded = new Date(date).getMonth(month).toString();
-       
-       let year = new Date(date).getFullYear().toString();
-       date === "" ? newDate.innerText = "Date Not Added" :   
-       newDate.innerText = day[dayAdded] + ", " + month[monthAdded] + " " + year
-            
-     } 
+   if(e.target.parentElement.children[0].checked){
+     content.classList.add('textDecoration');
+ } 
+ }
+
+ 
 });
-
-
-
-
-
+}
+ 
+});
 
 
 addBtn.onclick = () => {
  let data = notesInput.value;
- const newTime = document.querySelector("#time");
- 
  data === "" ? alert("Add Notes First") :  createNode(data);
   notesInput.value = "";
-  newTime.innerText = new Date().toLocaleTimeString()
-
-
 };
-
-
-
-
-
 
 
 
